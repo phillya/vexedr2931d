@@ -14,6 +14,7 @@ void RightStop()
 	motor[RightM] = 0;
 	motor[RightB] = 0;
 }
+
 void LeftForward()
 {
 	motor[LeftF] = FullSpeed;
@@ -40,6 +41,12 @@ void RightBackward()
 	motor[RightF] = -FullSpeed;
 	motor[RightM] = -FullSpeed;
 	motor[RightB] = -FullSpeed;
+}
+
+void AllForward()
+{
+	LeftForward();
+	RightForward();
 }
 
 int JSLeftH()
