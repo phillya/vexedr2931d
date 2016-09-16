@@ -9,7 +9,7 @@
 #pragma competitionControl(Competition)
 
 #include "Vex_Competition_Includes.c"
-#include "PhilippVEX.c"
+#include "PhilippVEX.h"
 
 void pre_auton()
 {
@@ -19,4 +19,9 @@ void pre_auton()
 task autonomous()
 {
 	allMotorsOff();
+}
+
+task usercontrol()
+{
+	UserLoop();
 }

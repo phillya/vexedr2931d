@@ -173,7 +173,7 @@ task Movement()
 	}
 }
 
-task usercontrol()
+void UserLoop()
 {
 	startTask(Movement);
 	while (true)
