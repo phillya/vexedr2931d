@@ -54,6 +54,34 @@ task autonomous()
 {
 }
 
+void TankMode()
+{
+	if (vexRT[vexJSLeftV] > Joystick)
+	{
+		LeftForward();
+	}
+	else if (vexRT[vexJSLeftV] < -Joystick)
+	{
+		LeftBackward();
+	}
+	else
+	{
+		LeftStop();
+	}
+	if (vexRT[vexJSRightV] > Joystick)
+	{
+		RightForward();
+	}
+	else if (vexRT[vexJSRightV] < -Joystick)
+	{
+		RightBackward();
+	}
+	else
+	{
+		RightStop();
+	}
+}
+
 task main()
 {
 	while (true)
@@ -122,29 +150,7 @@ task main()
 			RightBackward();
 		}
 */
-		if (vexRT[vexJSLeftV] > Joystick)
-		{
-			LeftForward();
-		}
-		else if (vexRT[vexJSLeftV] < -Joystick)
-		{
-			LeftBackward();
-		}
-		else
-		{
-			LeftStop();
-		}
-		if (vexRT[vexJSRightV] > Joystick)
-		{
-			RightForward();
-		}
-		else if (vexRT[vexJSRightV] < -Joystick)
-		{
-			RightBackward();
-		}
-		else
-		{
-			RightStop();
-		}
+		TankMode();
+		sleep(100);
 	}
 }
