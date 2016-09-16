@@ -54,31 +54,125 @@ task autonomous()
 {
 }
 
-void TankMode()
+int JSLeftH()
+{
+	if (vexRT[vexJSLeftH] > Joystick)
+		return 1;
+	if (vexRT[vexJSLeftH] < -Joystick)
+		return -1;
+	return 0;
+}
+
+int JSLeftV()
 {
 	if (vexRT[vexJSLeftV] > Joystick)
-	{
-		LeftForward();
-	}
-	else if (vexRT[vexJSLeftV] < -Joystick)
-	{
-		LeftBackward();
-	}
-	else
-	{
-		LeftStop();
-	}
+		return 1;
+	if (vexRT[vexJSLeftV] < -Joystick)
+		return -1;
+	return 0;
+}
+
+int JSRightH()
+{
+	if (vexRT[vexJSRightH] > Joystick)
+		return 1;
+	if (vexRT[vexJSRightH] < -Joystick)
+		return -1;
+	return 0;
+}
+
+int JSRightV()
+{
 	if (vexRT[vexJSRightV] > Joystick)
+		return 1;
+	if (vexRT[vexJSRightV] < -Joystick)
+		return -1;
+	return 0;
+}
+
+void TankMode()
+{
+	switch (JSLeftV())
 	{
+	case 1:
+		LeftForward();
+		break;
+	case -1:
+		LeftBackward();
+		break;
+	default:
+		LeftStop();
+		break;
+	}
+	switch (JSRightV())
+	{
+	case 1:
 		RightForward();
-	}
-	else if (vexRT[vexJSRightV] < -Joystick)
-	{
+		break;
+	case -1:
 		RightBackward();
-	}
-	else
-	{
+		break;
+	default:
 		RightStop();
+		break;
+	}
+}
+
+void TwoJS()
+{
+	switch (JSLeftV())
+	{
+	case 1:
+		switch (JSLeftH())
+		{
+		case 1:
+			LeftForward();
+			RightStop();
+			break;
+		case -1:
+			LeftStop();
+			RightForward();
+			break;
+		default:
+			LeftForward();
+			RightForward();
+			break;
+		}
+		break;
+	case -1:
+		switch (JSLeftH())
+		{
+		case 1:
+			LeftBackward();
+			RightStop();
+			break;
+		case -1:
+			LeftStop();
+			RightBackward();
+			break;
+		default:
+			LeftBackward();
+			RightBackward();
+			break;
+		}
+		break;
+	default:
+		switch (JSLeftH())
+		{
+		case 1:
+			LeftForward();
+			RightBackward();
+			break;
+		case -1:
+			LeftBackward();
+			RightForward();
+			break;
+		default:
+			LeftStop();
+			RightStop();
+			break;
+		}
+		break;
 	}
 }
 
@@ -86,70 +180,6 @@ task main()
 {
 	while (true)
 	{
-/*
-		bool forward = false;
-		bool backward = false;
-		if (vexRT[vexJSLeftV] > Joystick)
-		{
-			forward = true;
-		}
-		else if (vexRT[vexJSLeftV] < -Joystick)
-		{
-			backward = true;
-		}
-		bool left = false;
-		bool right = false;
-		if (vexRT[vexJSLeftH] < -Joystick)
-		{
-			left = true;
-		}
-		else if (vexRT[vexJSLeftH] > Joystick)
-		{
-			right = true;
-		}
-		if (forward)
-		{
-			if (left)
-			{
-				RightForward();
-			}
-			else if (right)
-			{
-				LeftForward();
-			}
-			else
-			{
-				LeftForward();
-				RightForward();
-			}
-		}
-		else if (backward)
-		{
-			if (left)
-			{
-				LeftBackward();
-			}
-			else if (right)
-			{
-				RightBackward();
-			}
-			else
-			{
-				LeftBackward();
-				RightBackward();
-			}
-		}
-		else if (left)
-		{
-			LeftBackward();
-			RightForward();
-		}
-		else if (right)
-		{
-			LeftForward();
-			RightBackward();
-		}
-*/
 		TankMode();
 		sleep(100);
 	}
