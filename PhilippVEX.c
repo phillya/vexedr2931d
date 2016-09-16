@@ -118,7 +118,7 @@ void TankMode()
 	}
 }
 
-void TwoJS()
+void OneJS()
 {
 	switch (JSLeftV())
 	{
@@ -176,11 +176,20 @@ void TwoJS()
 	}
 }
 
-task main()
+task Movement()
 {
 	while (true)
 	{
-		TankMode();
-		sleep(100);
+		OneJS();
+		wait1Msec(100);
+	}
+}
+
+task main()
+{
+	startTask(Movement);
+	while (true)
+	{
+		sleep(1);
 	}
 }
