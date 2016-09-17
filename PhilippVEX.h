@@ -175,7 +175,7 @@ task Movement()
 {
 	while (true)
 	{
-		OneJS();
+		TankMode();
 		wait1Msec(100);
 	}
 }

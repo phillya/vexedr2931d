@@ -19,7 +19,7 @@ void pre_auton()
 task autonomous()
 {
 	AllForward();
-	wait1Msec(4000);
+	wait1Msec(3250);
 	allMotorsOff();
 }
 
