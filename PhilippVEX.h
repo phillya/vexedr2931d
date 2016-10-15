@@ -1,52 +1,73 @@
+//#define THREE_MOTORS
 const int FullSpeed = 127;
+const int LeftFullSpeed = 50;
+const int RightFullSpeed = 100;
 const int Joystick = 30;
 
 void LeftStop()
 {
 	motor[LeftF] = 0;
+#ifdef THREE_MOTORS
 	motor[LeftM] = 0;
+#endif
 	motor[LeftB] = 0;
 }
 
 void RightStop()
 {
 	motor[RightF] = 0;
+#ifdef THREE_MOTORS
 	motor[RightM] = 0;
+#endif
 	motor[RightB] = 0;
 }
 
 void LeftForward()
 {
-	motor[LeftF] = FullSpeed;
-	motor[LeftM] = FullSpeed;
-	motor[LeftB] = FullSpeed;
+	motor[LeftF] = LeftFullSpeed;
+#ifdef THREE_MOTORS
+	motor[LeftM] = LeftFullSpeed;
+#endif
+	motor[LeftB] = LeftFullSpeed;
 }
 
 void RightForward()
 {
-	motor[RightF] = FullSpeed;
-	motor[RightM] = FullSpeed;
-	motor[RightB] = FullSpeed;
+	motor[RightF] = RightFullSpeed;
+#ifdef THREE_MOTORS
+	motor[RightM] = RightFullSpeed;
+#endif
+	motor[RightB] = RightFullSpeed;
 }
 
 void LeftBackward()
 {
-	motor[LeftF] = -FullSpeed;
-	motor[LeftM] = -FullSpeed;
-	motor[LeftB] = -FullSpeed;
+	motor[LeftF] = -LeftFullSpeed;
+#ifdef THREE_MOTORS
+	motor[LeftM] = -LeftFullSpeed;
+#endif
+	motor[LeftB] = -LeftFullSpeed;
 }
 
 void RightBackward()
 {
-	motor[RightF] = -FullSpeed;
-	motor[RightM] = -FullSpeed;
-	motor[RightB] = -FullSpeed;
+	motor[RightF] = -RightFullSpeed;
+#ifdef THREE_MOTORS
+	motor[RightM] = -RightFullSpeed;
+#endif
+	motor[RightB] = -RightFullSpeed;
 }
 
 void AllForward()
 {
 	LeftForward();
 	RightForward();
+}
+
+void AllBackward()
+{
+	LeftBackward();
+	RightBackward();
 }
 
 int JSLeftH()
