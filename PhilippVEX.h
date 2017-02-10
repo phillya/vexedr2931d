@@ -70,6 +70,30 @@ void AllBackward()
 	RightBackward();
 }
 
+void ClawUp()
+{
+	motor[ClawLU] = FullSpeed;
+	motor[ClawLD] = FullSpeed;
+	motor[ClawRU] = FullSpeed;
+	motor[ClawRD] = FullSpeed;
+}
+
+void ClawDown()
+{
+	motor[ClawLU] = -FullSpeed;
+	motor[ClawLD] = -FullSpeed;
+	motor[ClawRU] = -FullSpeed;
+	motor[ClawRD] = -FullSpeed;
+}
+
+void ClawStop()
+{
+	motor[ClawLU] = 0;
+	motor[ClawLD] = 0;
+	motor[ClawRU] = 0;
+	motor[ClawRD] = 0;
+}
+
 int JSLeftH()
 {
 	if (vexRT[vexJSLeftH] > Joystick)
@@ -106,6 +130,15 @@ int JSRightV()
 	return 0;
 }
 
+int ClawButton()
+{
+	if (vexRT[Btn5U])
+		return 1;
+	if (vexRT[Btn5D])
+		return -1;
+	return 0;
+}
+
 void TankMode()
 {
 	switch (JSLeftV())
@@ -130,6 +163,18 @@ void TankMode()
 		break;
 	default:
 		RightStop();
+		break;
+	}
+	switch (ClawButton())
+	{
+	case 1:
+		ClawUp();
+		break;
+	case -1:
+		ClawDown();
+		break;
+	default:
+		ClawStop();
 		break;
 	}
 }
@@ -188,6 +233,18 @@ void OneJS()
 			RightStop();
 			break;
 		}
+		break;
+	}
+	switch (ClawButton())
+	{
+	case 1:
+		ClawUp();
+		break;
+	case -1:
+		ClawDown();
+		break;
+	default:
+		ClawStop();
 		break;
 	}
 }
