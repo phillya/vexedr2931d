@@ -1,7 +1,7 @@
 //#define THREE_MOTORS
 const int FullSpeed = 127;
-const int LeftFullSpeed = 50;
-const int RightFullSpeed = 100;
+const int LeftFullSpeed = FullSpeed / 2;
+const int RightFullSpeed = LeftFullSpeed * 2;
 const int Joystick = 30;
 
 void LeftStop()
